@@ -56,11 +56,23 @@ class HtmlTextView @JvmOverloads constructor(
     }
 
     fun setHtml(html: String) {
-        val spanned = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+
+        // 1️⃣ Parse HTML WITH image support
+        val spanned = Html.fromHtml(
+            html,
+            Html.FROM_HTML_MODE_LEGACY,
+            HtmlImageGetter(this),   // ⭐ THIS WAS MISSING
+            null
+        )
 
         val spannable = SpannableStringBuilder(spanned)
 
-        val urlSpans = spannable.getSpans(0, spannable.length, URLSpan::class.java)
+        // 2️⃣ Intercept <a href="">
+        val urlSpans = spannable.getSpans(
+            0,
+            spannable.length,
+            URLSpan::class.java
+        )
 
         for (span in urlSpans) {
             val start = spannable.getSpanStart(span)
@@ -73,10 +85,15 @@ class HtmlTextView @JvmOverloads constructor(
             spannable.setSpan(
                 object : ClickableSpan() {
                     override fun onClick(widget: View) {
-                        val handled = linkClickListener?.onLinkClick(url) ?: false
-                        if (!handled) {
+                        val handledByUser =
+                            linkClickListener?.onLinkClick(url) == true
+
+                        if (!handledByUser) {
                             widget.context.startActivity(
-                                Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                                Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse(url)
+                                )
                             )
                         }
                     }
@@ -87,9 +104,11 @@ class HtmlTextView @JvmOverloads constructor(
             )
         }
 
+        // 3️⃣ Apply text
         text = spannable
         movementMethod = LinkMovementMethod.getInstance()
     }
+
 
     fun setOnLinkClickListener(listener: OnLinkClickListener) {
         linkClickListener = listener
