@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         }
         val htmlView = findViewById<HtmlTextView>(R.id.htmlView)
         htmlView.setHtml(
-            "<h2>Hello</h2><p>This is <b>HTML</b> text</p>"
+            "<h2>Hello</h2><p>This is <b>HTML</b> text</p>\n<a href=\"https://google.com\">Google</a>\n"
         )
     }
 }

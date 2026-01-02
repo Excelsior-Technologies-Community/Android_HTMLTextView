@@ -3,6 +3,8 @@
 
     <declare-styleable name="HtmlTextView">
         <attr name="htmlText" format="string" />
+        <attr name="linkColor" format="color" />
+        <attr name="lineSpacingExtra" format="dimension" />
     </declare-styleable>
 
 </resources>
