@@ -14,6 +14,19 @@ class HtmlTextView @JvmOverloads constructor(
 
     init {
         movementMethod = LinkMovementMethod.getInstance()
+
+        attrs?.let {
+            val typedArray = context.obtainStyledAttributes(
+                it,
+                R.styleable.HtmlTextView
+            )
+            val html = typedArray.getString(
+                R.styleable.HtmlTextView_htmlText
+            )
+            typedArray.recycle()
+
+            html?.let { setHtml(it) }
+        }
     }
 
     fun setHtml(html: String) {
