@@ -3,7 +3,9 @@
 
     <declare-styleable name="HtmlTextView">
         <attr name="htmlText" format="string" />
+        <attr name="htmlTextColor" format="color" />
         <attr name="linkColor" format="color" />
+        <attr name="htmlTextSize" format="dimension" />
         <attr name="lineSpacingExtra" format="dimension" />
     </declare-styleable>
 

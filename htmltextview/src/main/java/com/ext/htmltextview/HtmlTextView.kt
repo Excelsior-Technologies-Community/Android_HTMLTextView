@@ -9,6 +9,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.URLSpan
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 
@@ -41,6 +42,16 @@ class HtmlTextView @JvmOverloads constructor(
                 currentTextColor
             )
 
+            val textColor = typedArray.getColor(
+                R.styleable.HtmlTextView_htmlTextColor,
+                currentTextColor
+            )
+
+            val textSizePx = typedArray.getDimension(
+                R.styleable.HtmlTextView_htmlTextSize,
+                textSize
+            )
+
             val lineSpacing = typedArray.getDimension(
                 R.styleable.HtmlTextView_lineSpacingExtra,
                 0f
@@ -50,6 +61,8 @@ class HtmlTextView @JvmOverloads constructor(
             setLineSpacing(lineSpacing, 1f)
 
             typedArray.recycle()
+            setTextColor(textColor)
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePx)
 
             html?.let { setHtml(it) }
         }

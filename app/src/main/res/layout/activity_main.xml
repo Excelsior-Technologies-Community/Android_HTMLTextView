@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:linkColor="@android:color/holo_blue_bright"
+        app:htmlTextColor="@android:color/holo_orange_light"
+        app:htmlTextSize="18sp"
         app:lineSpacingExtra="8dp"/>
 
 
