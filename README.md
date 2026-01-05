@@ -34,7 +34,7 @@ dependencyResolutionManagement {
 ### Add Dependency
 ```
 dependencies {
-	        implementation 'com.github.Excelsior-Technologies-Community:Android_BalloonPopup:1.0.0'
+	        implementation 'com.github.Excelsior-Technologies-Community:Android_HTMLTextView:1.0.0'
 	}
 ```
 
